@@ -16,94 +16,39 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
-from django.contrib import admin
-from django.urls import path
 from django.http import HttpResponse
 
 def home(request):
     return HttpResponse("""
-    <!DOCTYPE html>
     <html>
     <head>
-        <title>Anvi's Animated World</title>
+        <title>Anvi Magic Heart</title>
         <style>
-            /* 1. Background Animation: Rang badalta hua parda */
-            body {
-                margin: 0; padding: 0;
-                font-family: 'Segoe UI', sans-serif;
-                height: 100vh;
-                display: flex; justify-content: center; align-items: center;
-                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-                background-size: 400% 400%;
-                animation: gradientBG 15s ease infinite;
-                overflow: hidden;
-            }
-
-            @keyframes gradientBG {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
-
-            /* 2. Floating Card: Jo hawa mein hilega */
-            .card {
-                background: white;
-                padding: 40px;
-                border-radius: 30px;
-                text-align: center;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-                animation: float 4s ease-in-out infinite;
-                width: 300px;
-            }
-
-            @keyframes float {
-                0% { transform: translateY(0px); }
-                50% { transform: translateY(-20px); }
-                100% { transform: translateY(0px); }
-            }
-
-            .icon {
-                font-size: 50px;
-                display: inline-block;
-                animation: spin 5s linear infinite;
-            }
-
-            @keyframes spin {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-
-            h1 { color: #333; margin: 15px 0; }
-            
-            .btn {
-                display: inline-block;
-                margin-top: 20px;
-                padding: 10px 20px;
-                background: #e73c7e;
-                color: white;
-                text-decoration: none;
-                border-radius: 25px;
-                font-weight: bold;
-                transition: 0.3s;
-            }
-
-            .btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 5px 15px rgba(231, 60, 126, 0.4);
-            }
+            body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #fff0f3; overflow: hidden; font-family: sans-serif; }
+            .heart { position: relative; width: 100px; height: 90px; background-color: #ff4d6d; cursor: pointer; animation: beat 1s infinite; box-shadow: 0 0 20px rgba(255,77,109,0.3); }
+            .heart:before, .heart:after { content: ""; position: absolute; top: 0; width: 100px; height: 150px; border-radius: 100px 100px 0 0; background-color: #ff4d6d; }
+            .heart:before { left: 100px; transform: rotate(-45deg); transform-origin: 0 100%; }
+            .heart:after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+            @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+            #butterfly { display: none; font-size: 100px; animation: fly 2s infinite ease-in-out; cursor: pointer; }
+            @keyframes fly { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-40px) rotate(10deg); } }
+            h1 { color: #ff4d6d; margin-top: 60px; font-size: 2.5rem; text-align: center; }
         </style>
     </head>
     <body>
-        <div class="card">
-            <div class="icon">✨</div>
-            <h1>Anvi ✨</h1>
-            <p>Django Animation Magic!</p>
-            <a href="/admin" class="btn">Admin Panel</a>
+        <div style="text-align: center;">
+            <div id="heart" class="heart" onclick="transformMagic()"></div>
+            <div id="butterfly">🦋</div>
+            <h1 id="msg">ANVI ✨<br><small style="font-size: 1rem;">(Touch the Heart for Magic)</small></h1>
         </div>
+        <script>
+            function transformMagic() {
+                document.getElementById('heart').style.display = "none";
+                document.getElementById('butterfly').style.display = "block";
+                document.getElementById('msg').innerHTML = "Butterfly Magic! 🦋<br>You did it, Anvi!";
+                document.body.style.backgroundColor = "#e0f7fa";
+            }
+        </script>
     </body>
     </html>
     """)
